@@ -3,7 +3,7 @@ package com.mainacad.controller;
 import com.mainacad.ApplicationRunner;
 import com.mainacad.entity.Profile;
 import com.mainacad.entity.User;
-import com.mainacad.service.UserService;
+import com.mainacad.service.interfaces.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

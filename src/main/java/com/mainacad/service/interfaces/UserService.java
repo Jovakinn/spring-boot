@@ -1,4 +1,4 @@
-package com.mainacad.service;
+package com.mainacad.service.interfaces;
 
 import com.mainacad.entity.User;
 
