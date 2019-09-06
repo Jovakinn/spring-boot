@@ -19,6 +19,7 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User savedUser = userService.save(user);
+
         if (savedUser != null) {
             return new ResponseEntity<User>(savedUser, HttpStatus.OK);
         }
@@ -28,6 +29,7 @@ public class UserController {
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User updatedUser = userService.update(user);
+
         if (updatedUser != null) {
             return new ResponseEntity(updatedUser, HttpStatus.OK);
         }
@@ -37,6 +39,7 @@ public class UserController {
     @GetMapping(path="/get-one/{id}")
     public ResponseEntity<User> getOne(@PathVariable Integer id) {
         User userFromDB = userService.findOne(id);
+
         if (userFromDB != null){
             return new ResponseEntity(userFromDB, HttpStatus.OK);
         }
