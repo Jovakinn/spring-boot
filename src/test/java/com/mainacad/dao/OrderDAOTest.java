@@ -11,6 +11,12 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This test is working incorrect because of relation to another bean,
+ * to create Order we need other beans but Spring told us, that
+ * it is NullPointerException...
+ */
+
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @ActiveProfiles("dev")

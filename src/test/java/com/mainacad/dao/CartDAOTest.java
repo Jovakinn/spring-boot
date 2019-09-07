@@ -14,6 +14,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This test is working incorrect because of relation to another bean,
+ * to create Cart we need other beans but Spring told us, that
+ * it is NullPointerException...
+ */
+
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @ActiveProfiles("dev")
