@@ -9,12 +9,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        // SpringApplication.run(ApplicationRunner.class, args);
+         SpringApplication.run(ApplicationRunner.class, args);
 
         // Run with profiles
-            SpringApplication context = new SpringApplication(ApplicationRunner.class);
-            context.setAdditionalProfiles("dev");
-            context.run(args);
+//            SpringApplication context = new SpringApplication(ApplicationRunner.class);
+//            context.setAdditionalProfiles("dev");
+//            context.run(args);
 
     }
 }

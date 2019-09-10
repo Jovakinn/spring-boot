@@ -46,7 +46,7 @@ class OrderServiceTest {
 
         Order savedOrder = orderService.findOne(order.getId());
 
-        assertEquals(savedOrder.getAmount(), 1);
+        assertEquals(java.util.Optional.ofNullable(savedOrder.getAmount()), 1);
         savedOrder.setItem(item);
 
         Order updatedOrder = orderService.update(savedOrder);

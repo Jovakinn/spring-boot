@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -21,16 +22,17 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart update(Cart cart) {
-        if (cart.getId() != null && cartDAO.findOne(cart.getId()) != null) {
-            return cartDAO.update(cart);
+        if (cart.getId() != null && findOne(cart.getId()) != null) {
+            return cartDAO.saveAndFlush(cart);
         }
         return null;
     }
 
     @Override
     public Cart findOne(Integer id) {
-        if (id != null) {
-            return cartDAO.findOne(id);
+        Optional<Cart> cartWrapper = cartDAO.findById(id);
+        if (cartWrapper.isPresent()){
+            return cartWrapper.get();
         }
         return null;
     }

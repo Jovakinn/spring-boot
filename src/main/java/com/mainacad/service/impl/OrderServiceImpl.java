@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-
 
     @Autowired
     OrderDAO orderDAO;
@@ -22,16 +22,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
-        if (order.getId() != null && orderDAO.findOne(order.getId()) != null) {
-            return orderDAO.update(order);
+        if (order.getId() != null && findOne(order.getId()) != null) {
+            return orderDAO.saveAndFlush(order);
         }
         return null;
     }
 
     @Override
     public Order findOne(Integer id) {
-        if (id != null) {
-            return orderDAO.findOne(id);
+        Optional<Order> orderWrapper = orderDAO.findById(id);
+        if (orderWrapper.isPresent()){
+            return orderWrapper.get();
         }
         return null;
     }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -21,16 +22,17 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item update(Item item) {
-        if (item.getId() != null && itemDAO.findOne(item.getId()) != null) {
-            return itemDAO.update(item);
+        if (item.getId() != null && findOne(item.getId()) != null) {
+            return itemDAO.saveAndFlush(item);
         }
         return null;
     }
 
     @Override
     public Item findOne(Integer id) {
-        if (id != null) {
-            return itemDAO.findOne(id);
+        Optional<Item> itemWrapper = itemDAO.findById(id);
+        if (itemWrapper.isPresent()){
+            return itemWrapper.get();
         }
         return null;
     }

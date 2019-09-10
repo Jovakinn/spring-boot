@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,21 +17,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        return userDAO.save(user);
+        if (user.getId() == null) {
+            return userDAO.saveAndFlush(user);
+        }
+        return userDAO.saveAndFlush(user);
     }
 
     @Override
     public User update(User user) {
-        if (user.getId() != null && userDAO.findOne(user.getId()) != null) {
-            return userDAO.update(user);
+        if (user.getId() != null && findOne(user.getId()) != null) {
+            return userDAO.saveAndFlush(user);
         }
         return null;
     }
 
     @Override
     public User findOne(Integer id) {
-        if (id != null) {
-            return userDAO.findOne(id);
+        Optional<User> userWrapper = userDAO.findById(id);
+        if (userWrapper.isPresent()){
+            return userWrapper.get();
         }
         return null;
     }
@@ -42,9 +47,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Integer id) {
-        User user = findOne(id);
-        if (user != null) {
-            userDAO.delete(user);
-        }
+        userDAO.deleteById(id);
     }
 }
