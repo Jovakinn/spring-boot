@@ -11,7 +11,7 @@ public class ApplicationRunner {
     public static void main(String[] args) {
          SpringApplication.run(ApplicationRunner.class, args);
 
-        // Run with profiles
+//  Run with profiles
 //            SpringApplication context = new SpringApplication(ApplicationRunner.class);
 //            context.setAdditionalProfiles("dev");
 //            context.run(args);
