@@ -29,7 +29,7 @@ class OrderServiceTest {
     CartService cartService;
     ItemService itemService;
 
-    @Test
+//    @Test
     public void testGetAndUpdate() {
         Cart cart = new Cart();
         cartService.save(cart);
