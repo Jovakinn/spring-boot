@@ -31,9 +31,9 @@ public class UserController {
         User updatedUser = userService.update(user);
 
         if (updatedUser != null) {
-            return new ResponseEntity(updatedUser, HttpStatus.OK);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping({"/{id}","/",""})

@@ -57,11 +57,42 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser() {
+    public void updateUser() throws URISyntaxException {
+
+        User user = new User();
+        user.setId(1);
+        user.setEmail("ignatenko2207@gmail.com");
+        user.setFirstName("Max");
+        user.setLastName("Khodakov");
+        user.setLogin("ignatenko2207");
+        user.setPassword("12345");
+        user.setProfile(Profile.ADMIN);
+
+        Mockito.when(userService.update(Mockito.any(User.class))).thenReturn(user);
+
+        RequestEntity<User> request = new RequestEntity<>(user, HttpMethod.POST, new URI("/user/update"));
+
+        ResponseEntity<User> response = testRestTemplate.exchange(request, User.class);
+
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+
+        Mockito.verify(userService, Mockito.times(1)).update(Mockito.any(User.class));
+
     }
 
     @Test
-    public void getOne() {
+    public void getOne() throws URISyntaxException{
+        Mockito.when(userService.findOne(1)).thenReturn(userService.findOne(1));
+
+        RequestEntity<User> request = new RequestEntity<>(HttpMethod.GET, new URI("/user/1"));
+
+        ResponseEntity<User> response = testRestTemplate.exchange(request, User.class);
+
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+
+        Mockito.verify(userService, Mockito.times(1)).findOne(Mockito.anyInt());
+
+
     }
 
     @Test
@@ -95,7 +126,9 @@ public class UserControllerTest {
     @Test
     public void delete() throws URISyntaxException {
         Mockito.doNothing().when(userService).delete(Mockito.anyInt());
+
         RequestEntity<User> request = new RequestEntity<>(HttpMethod.DELETE, new URI("/user/222"));
+
         ResponseEntity response = testRestTemplate.exchange(request, Object.class);
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
