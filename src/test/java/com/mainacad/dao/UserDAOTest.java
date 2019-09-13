@@ -21,7 +21,7 @@ public class UserDAOTest {
     @Test
     void testFindUserByLoginAndPassword(){
         User user = new User();
-        user.setEmail("ignatenko2207@gmail.com");
+        user.setEmail("ignatenko@gmail.com");
         user.setFirstName("Alex");
         user.setLastName("Ignatenko");
         user.setLogin("ignatenko2207");
@@ -39,7 +39,7 @@ public class UserDAOTest {
         userDAO.delete(savedUser);
     }
 
-    @Test
+//    @Test
     void testFindUserBySQLQuery(){
         User user = new User();
         user.setEmail("ignatenko@gmail.com");
