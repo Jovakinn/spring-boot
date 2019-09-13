@@ -24,6 +24,8 @@ import java.net.URISyntaxException;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CartControllerTest {
 
+    // MAIN PROBLEM IS CREATING BEANS..
+
     @Autowired
     TestRestTemplate testRestTemplate;
 

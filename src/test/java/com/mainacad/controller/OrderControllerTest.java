@@ -26,7 +26,7 @@ import java.net.URISyntaxException;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderControllerTest {
 
-    // MAIN PROBLEM CREATING BEANS..
+    // MAIN PROBLEM IS CREATING BEANS..
 
     @Autowired
     TestRestTemplate testRestTemplate;
@@ -128,7 +128,7 @@ class OrderControllerTest {
     }
 
     @Test
-    void getOneOrList() throws URISyntaxException {
+    void getOneOrList() throws URISyntaxException, NullPointerException {
         Mockito.when(orderService.findOne(1)).thenReturn(orderService.findOne(1));
 
         RequestEntity<Order> request = new RequestEntity<>(HttpMethod.GET, new URI("/order/1"));
@@ -141,7 +141,7 @@ class OrderControllerTest {
     }
 
     @Test
-    void delete() throws URISyntaxException {
+    void delete() throws URISyntaxException, NullPointerException {
         Mockito.doNothing().when(orderService).delete(Mockito.anyInt());
 
         RequestEntity<User> request = new RequestEntity<>(HttpMethod.DELETE, new URI("/order/222"));
