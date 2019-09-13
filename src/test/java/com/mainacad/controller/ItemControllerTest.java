@@ -59,7 +59,7 @@ class ItemControllerTest {
 
         Mockito.when(itemService.update(Mockito.any(Item.class))).thenReturn(item);
 
-        RequestEntity<Item> request = new RequestEntity<>(item, HttpMethod.POST, new URI("/user/update"));
+        RequestEntity<Item> request = new RequestEntity<>(item, HttpMethod.POST, new URI("/item/update"));
 
         ResponseEntity<Item> response = testRestTemplate.exchange(request, Item.class);
 
@@ -73,7 +73,7 @@ class ItemControllerTest {
     void getOneOrList() throws URISyntaxException {
         Mockito.when(itemService.findOne(1)).thenReturn(itemService.findOne(1));
 
-        RequestEntity<Item> request = new RequestEntity<>(HttpMethod.GET, new URI("/user/1"));
+        RequestEntity<Item> request = new RequestEntity<>(HttpMethod.GET, new URI("/item/1"));
 
         ResponseEntity<Item> response = testRestTemplate.exchange(request, Item.class);
 
@@ -88,7 +88,7 @@ class ItemControllerTest {
     void delete() throws URISyntaxException {
         Mockito.doNothing().when(itemService).delete(Mockito.anyInt());
 
-        RequestEntity<Item> request = new RequestEntity<>(HttpMethod.DELETE, new URI("/user/222"));
+        RequestEntity<Item> request = new RequestEntity<>(HttpMethod.DELETE, new URI("/item/222"));
 
         ResponseEntity response = testRestTemplate.exchange(request, Object.class);
 
