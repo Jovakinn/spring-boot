@@ -24,7 +24,7 @@ class OrderDAOTest {
 
 
     @Test
-    void testFindUserByLoginAndPassword(){
+    void testFindUserByLoginAndPassword() throws NullPointerException{
 
         Cart cart = new Cart();
         cartDAO.save(cart);
