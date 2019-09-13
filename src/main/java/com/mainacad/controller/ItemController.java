@@ -31,9 +31,9 @@ public class ItemController {
         Item updatedItem = itemService.update(item);
 
         if (updatedItem != null) {
-            return new ResponseEntity(updatedItem, HttpStatus.OK);
+            return new ResponseEntity<>(updatedItem, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 
