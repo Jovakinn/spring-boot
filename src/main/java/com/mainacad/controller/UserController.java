@@ -36,19 +36,19 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping({"/{id}","/",""})
     public ResponseEntity getOneOrList(@PathVariable(required = false) Integer id) { // check without id
         if (id != null) {
             User userFromDB = userService.findOne(id);
             if (userFromDB != null){
-                return new ResponseEntity(userFromDB, HttpStatus.OK);
+                return new ResponseEntity<>(userFromDB, HttpStatus.OK);
             }
         } else {
             List<User> users = userService.findAll();
-            return new ResponseEntity(users, HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path="/{id}")

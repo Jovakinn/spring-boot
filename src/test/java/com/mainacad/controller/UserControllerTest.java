@@ -77,7 +77,7 @@ public class UserControllerTest {
         Mockito.verify(userService, Mockito.times(1)).findOne(Mockito.anyInt());
     }
 
-    //        @Test
+    @Test
     public void getAll() throws URISyntaxException {
         Mockito.when(userService.findAll()).thenReturn(new ArrayList<>());
 
