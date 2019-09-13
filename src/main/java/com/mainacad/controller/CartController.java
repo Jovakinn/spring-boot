@@ -36,20 +36,20 @@ public class CartController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path="/get-one/{id}")
-    public ResponseEntity<Cart> getOne(@PathVariable Integer id) {
-        Cart cartFromDB = cartService.findOne(id);
 
-        if (cartFromDB != null){
-            return new ResponseEntity(cartFromDB, HttpStatus.OK);
+    @GetMapping({"/{id}","/",""})
+    public ResponseEntity getOneOrList(@PathVariable(required = false) Integer id) { // check without id
+        if (id != null) {
+            Cart cartFromDB = cartService.findOne(id);
+            if (cartFromDB!= null){
+                return new ResponseEntity<>(cartFromDB, HttpStatus.OK);
+            }
+        } else {
+            List<Cart> carts = cartService.findAll();
+            return new ResponseEntity<>(carts, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
 
-    @GetMapping(path="/get-all")
-    public ResponseEntity<List> getAll() {
-        List<Cart> carts = cartService.findAll();
-        return new ResponseEntity(carts, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path="/{id}")

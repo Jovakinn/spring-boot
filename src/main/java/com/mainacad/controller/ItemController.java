@@ -36,20 +36,20 @@ public class ItemController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path="/get-one/{id}")
-    public ResponseEntity<Item> getOne(@PathVariable Integer id) {
-        Item itemFromDB = itemService.findOne(id);
 
-        if (itemFromDB != null){
-            return new ResponseEntity(itemFromDB, HttpStatus.OK);
+    @GetMapping({"/{id}","/",""})
+    public ResponseEntity getOneOrList(@PathVariable(required = false) Integer id) { // check without id
+        if (id != null) {
+            Item itemFromDB = itemService.findOne(id);
+            if (itemFromDB != null){
+                return new ResponseEntity<>(itemFromDB, HttpStatus.OK);
+            }
+        } else {
+            List<Item> items = itemService.findAll();
+            return new ResponseEntity<>(items, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
 
-    @GetMapping(path="/get-all")
-    public ResponseEntity<List> getAll() {
-        List<Item> items = itemService.findAll();
-        return new ResponseEntity(items, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path="/{id}")

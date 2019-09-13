@@ -36,20 +36,19 @@ public class OrderController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path="/get-one/{id}")
-    public ResponseEntity<Order> getOne(@PathVariable Integer id) {
-        Order orderFromDB = orderService.findOne(id);
-
-        if (orderFromDB != null){
-            return new ResponseEntity(orderFromDB, HttpStatus.OK);
+    @GetMapping({"/{id}","/",""})
+    public ResponseEntity getOneOrList(@PathVariable(required = false) Integer id) { // check without id
+        if (id != null) {
+            Order orderFromDB = orderService.findOne(id);
+            if (orderFromDB != null){
+                return new ResponseEntity<>(orderFromDB, HttpStatus.OK);
+            }
+        } else {
+            List<Order> orders = orderService.findAll();
+            return new ResponseEntity<>(orders, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
 
-    @GetMapping(path="/get-all")
-    public ResponseEntity<List> getAll() {
-        List<Order> orders = orderService.findAll();
-        return new ResponseEntity(orders, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path="/{id}")
