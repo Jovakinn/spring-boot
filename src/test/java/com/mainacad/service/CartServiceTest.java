@@ -2,6 +2,7 @@ package com.mainacad.service;
 
 import com.mainacad.ApplicationRunner;
 import com.mainacad.entity.Cart;
+import com.mainacad.entity.Profile;
 import com.mainacad.entity.Status;
 import com.mainacad.entity.User;
 import com.mainacad.service.interfaces.CartService;
@@ -15,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This test is working incorrect because of relation to another bean,
- * to create Cart we need other beans but Spring told us, that
- * it is NullPointerException...
+ * to create Cart we need other beans but Spring told us,
+ * NullPointerException...
  */
 
 
@@ -28,9 +29,15 @@ class CartServiceTest {
     CartService cartService;
     UserService userService;
 
-//    @Test
-    public void testGetAndUpdate() {
+    @Test
+    public void testGetAndUpdate() throws NullPointerException {
         User user = new User();
+        user.setLogin("12344");
+        user.setEmail("max05012004@gmail.com");
+        user.setFirstName("Max");
+        user.setLastName("Xam");
+        user.setPassword("111");
+        user.setProfile(Profile.CLIENT);
         userService.save(user);
 
         Cart cart = new Cart();
