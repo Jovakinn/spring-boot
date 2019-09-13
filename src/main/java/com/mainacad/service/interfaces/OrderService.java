@@ -9,6 +9,7 @@ public interface OrderService {
     Order save(Order order);
     Order update(Order order);
     Order findOne(Integer id);
+    Order findOneByAmount(Integer amount);
     List<Order> findAll();
     void delete(Integer id);
 

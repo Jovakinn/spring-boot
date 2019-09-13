@@ -38,6 +38,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order findOneByAmount(Integer amount) {
+        List<Order> orders = orderDAO.findAllByAmount(amount);
+        if (!orders.isEmpty()){
+            orders.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public List<Order> findAll() {
         return orderDAO.findAll();
     }
