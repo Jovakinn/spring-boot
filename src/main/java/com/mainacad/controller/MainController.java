@@ -8,6 +8,6 @@ public class MainController {
 
     @GetMapping({"/", "/index", "/main"})
     public String getLandingPage() {
-        return "index";
+        return "authorization";
     }
 }
