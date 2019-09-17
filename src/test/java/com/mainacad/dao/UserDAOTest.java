@@ -52,7 +52,7 @@ public class UserDAOTest {
         User savedUser = userDAO.save(user);
         assertNotNull(savedUser);
 
-        List<User> users = userDAO.findAllBySQLQuery(savedUser.getEmail());
+        List<User> users = userDAO.findAllByEmailQuery(savedUser.getEmail());
         assertNotNull(users);
         assertTrue(!users.isEmpty());
         assertEquals(users.get(0).getEmail(), savedUser.getEmail());
