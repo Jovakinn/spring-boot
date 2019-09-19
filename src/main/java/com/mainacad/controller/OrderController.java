@@ -23,7 +23,7 @@ public class OrderController {
         if (savedOrder != null) {
             return new ResponseEntity<Order>(savedOrder, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping()
@@ -31,9 +31,9 @@ public class OrderController {
         Order updatedOrder = orderService.update(order);
 
         if (updatedOrder != null) {
-            return new ResponseEntity(updatedOrder, HttpStatus.OK);
+            return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping({"/{id}","/",""})
