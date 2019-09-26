@@ -3,11 +3,13 @@ package com.mainacad.controller;
 import com.mainacad.entity.User;
 import com.mainacad.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -39,6 +41,7 @@ public class UserController {
     }
 
     @GetMapping({"/{id}","/",""})
+    @Cacheable
     public ResponseEntity getOneOrList(@PathVariable(required = false) Integer id) { // check without id
         if (id != null) {
             User userFromDB = userService.findOne(id);
@@ -51,6 +54,13 @@ public class UserController {
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping(path = "/balance")
+    public ResponseEntity getBalance(@RequestParam Integer id, @RequestParam Double oldBalance) {
+//        userService.getBalance(id);
+        Double balance = new BigDecimal(userService.findOne(id).hashCode()).setScale(2).doubleValue();
+        return new ResponseEntity<Double>(balance, HttpStatus.OK);
     }
 
     @DeleteMapping(path="/{id}")

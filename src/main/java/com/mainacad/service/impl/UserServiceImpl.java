@@ -4,6 +4,7 @@ import com.mainacad.dao.UserDAO;
 import com.mainacad.entity.User;
 import com.mainacad.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Async
     public User findOneByLoginAndPassword(String login, String password) {
         List<User> users = userDAO.findAllByLoginAndPassword(login, password);
         if (!users.isEmpty()){
