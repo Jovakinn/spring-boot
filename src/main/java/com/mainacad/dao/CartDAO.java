@@ -15,6 +15,6 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
     List<Cart> findByUser(User user);
 
     @Query(nativeQuery = true, value = "SELECT * FROM carts WHERE status=false AND user_id=?")
-    List<Cart> findByOpenCartAndUser(Integer userid);
+    List<Cart> findByOpenCartAndUser(Integer usedId);
 
 }

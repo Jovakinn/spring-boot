@@ -2,6 +2,7 @@ package com.mainacad.service.impl;
 
 import com.mainacad.dao.CartDAO;
 import com.mainacad.entity.Cart;
+import com.mainacad.entity.User;
 import com.mainacad.service.interfaces.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,24 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> findAll() {
         return cartDAO.findAll();
+    }
+
+    @Override
+    public List<Cart> findByUser(User user) {
+        List<Cart> carts = cartDAO.findByUser(user);
+        if (!carts.isEmpty()){
+            carts.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Cart> findByOpenCartAndUser(Integer userId) {
+        List<Cart> carts = cartDAO.findByOpenCartAndUser(userId);
+        if (!carts.isEmpty()){
+            carts.get(0);
+        }
+        return null;
     }
 
     @Override
