@@ -38,6 +38,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public Optional<Item> findById(Integer id) {
+        return itemDAO.findById(id);
+    }
+
+    @Override
     public List<Item> findAll() {
         return itemDAO.findAll();
     }
