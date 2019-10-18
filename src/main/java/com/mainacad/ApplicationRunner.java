@@ -13,7 +13,7 @@ public class ApplicationRunner {
 
 //  Run with profiles
             SpringApplication context = new SpringApplication(ApplicationRunner.class);
-            context.setAdditionalProfiles("jsp");
+            context.setAdditionalProfiles("json");
             context.run(args);
 
     }
