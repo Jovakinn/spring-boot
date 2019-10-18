@@ -61,6 +61,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAllByEmailQuery(String email) {
+        List<User> users = userDAO.findAllByEmailQuery(email);
+        if (!users.isEmpty()){
+            users.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Optional<User> findById(Integer id) {
+        return userDAO.findById(id);
+    }
+
+    @Override
     public List<User> findAll() {
         return userDAO.findAll();
     }
