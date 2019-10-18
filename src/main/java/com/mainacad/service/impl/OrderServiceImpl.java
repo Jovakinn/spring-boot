@@ -47,6 +47,20 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Optional<Order> findById(Integer id) {
+        return orderDAO.findById(id);
+    }
+
+    @Override
+    public List<Order> findByCart(Integer cartId) {
+        List<Order> orders = orderDAO.findByCart(cartId);
+        if (!orders.isEmpty()){
+            orders.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public List<Order> findAll() {
         return orderDAO.findAll();
     }
