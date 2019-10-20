@@ -19,7 +19,11 @@ class OrderDAOTest {
 
     @Autowired
     OrderDAO orderDAO;
+
+    @Autowired
     ItemDAO itemDAO;
+
+    @Autowired
     CartDAO cartDAO;
 
 

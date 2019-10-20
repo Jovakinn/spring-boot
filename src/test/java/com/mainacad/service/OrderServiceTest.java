@@ -25,8 +25,14 @@ class OrderServiceTest  {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
     UserService userService;
+
+    @Autowired
     CartService cartService;
+
+    @Autowired
     ItemService itemService;
 
     @Test

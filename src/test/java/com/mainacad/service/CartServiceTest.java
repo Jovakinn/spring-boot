@@ -27,6 +27,8 @@ class CartServiceTest {
 
     @Autowired
     CartService cartService;
+
+    @Autowired
     UserService userService;
 
     @Test

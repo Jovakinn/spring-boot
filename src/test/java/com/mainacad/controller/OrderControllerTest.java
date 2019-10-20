@@ -33,8 +33,14 @@ class OrderControllerTest {
 
     @MockBean
     OrderService orderService;
+
+    @MockBean
     CartService cartService;
+
+    @MockBean
     ItemService itemService;
+
+    @MockBean
     UserService userService;
 
     @Test

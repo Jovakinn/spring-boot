@@ -31,6 +31,8 @@ class CartControllerTest {
 
     @MockBean
     CartService cartService;
+
+    @MockBean
     UserService userService;
 
     @Test
