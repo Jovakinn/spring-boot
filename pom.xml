@@ -30,12 +30,6 @@
 
   <dependencies>
 
-    <!--FLYWAY -->
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-    </dependency>
-
     <!--LOMBOK-->
     <dependency>
       <groupId>org.projectlombok</groupId>
