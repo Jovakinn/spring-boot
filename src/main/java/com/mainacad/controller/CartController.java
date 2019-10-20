@@ -23,7 +23,7 @@ public class CartController {
         if (savedCart != null) {
             return new ResponseEntity<Cart>(savedCart, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping()
@@ -31,9 +31,9 @@ public class CartController {
         Cart updatedCart = cartService.update(cart);
 
         if (updatedCart != null) {
-            return new ResponseEntity(updatedCart, HttpStatus.OK);
+            return new ResponseEntity<Cart>(updatedCart, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 

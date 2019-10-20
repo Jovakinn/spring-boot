@@ -23,7 +23,7 @@ public class ItemController {
         if (savedItem != null) {
             return new ResponseEntity<Item>(savedItem, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping()

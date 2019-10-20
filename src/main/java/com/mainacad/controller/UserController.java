@@ -27,7 +27,7 @@ public class UserController {
         if (savedUser != null) {
             return new ResponseEntity<User>(savedUser, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping()
