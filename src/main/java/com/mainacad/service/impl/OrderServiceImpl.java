@@ -31,10 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order findOne(Integer id) {
         Optional<Order> orderWrapper = orderDAO.findById(id);
-        if (orderWrapper.isPresent()){
-            return orderWrapper.get();
-        }
-        return null;
+        return orderWrapper.orElse(null);
     }
 
     @Override

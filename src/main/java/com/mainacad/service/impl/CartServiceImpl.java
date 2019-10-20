@@ -32,10 +32,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart findOne(Integer id) {
         Optional<Cart> cartWrapper = cartDAO.findById(id);
-        if (cartWrapper.isPresent()){
-            return cartWrapper.get();
-        }
-        return null;
+        return cartWrapper.orElse(null);
     }
 
     @Override

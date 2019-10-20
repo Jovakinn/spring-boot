@@ -35,10 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findOne(Integer id) {
         Optional<User> userWrapper = userDAO.findById(id);
-        if (userWrapper.isPresent()){
-            return userWrapper.get();
-        }
-        return null;
+        return userWrapper.orElse(null);
     }
 
     @Override

@@ -31,10 +31,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item findOne(Integer id) {
         Optional<Item> itemWrapper = itemDAO.findById(id);
-        if (itemWrapper.isPresent()){
-            return itemWrapper.get();
-        }
-        return null;
+        return itemWrapper.orElse(null);
     }
 
     @Override
