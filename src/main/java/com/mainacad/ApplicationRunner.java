@@ -11,7 +11,8 @@ public class ApplicationRunner {
     public static void main(String[] args) {
 //         SpringApplication.run(ApplicationRunner.class, args);
 
-//  Run with profiles
+        //  You can Run it with profiles
+
             SpringApplication context = new SpringApplication(ApplicationRunner.class);
             context.setAdditionalProfiles("json");
             context.run(args);
