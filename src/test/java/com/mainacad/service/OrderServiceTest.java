@@ -8,8 +8,11 @@ import com.mainacad.service.interfaces.OrderService;
 import com.mainacad.service.interfaces.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 @SpringJUnitConfig(ApplicationRunner.class)
-@ActiveProfiles("dev")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderServiceTest  {
 
     @Autowired
@@ -36,7 +39,7 @@ class OrderServiceTest  {
     ItemService itemService;
 
     @Test
-    public void testGetAndUpdate() throws NullPointerException {
+    public void testGetAndUpdateAndDelete() throws NullPointerException {
 
         // creating user
         User user = new User();
@@ -74,11 +77,16 @@ class OrderServiceTest  {
 
         Order savedOrder = orderService.findOne(order.getId());
 
-        assertEquals(java.util.Optional.ofNullable(savedOrder.getAmount()), 1);
+        assertEquals(java.util.Optional.ofNullable(savedOrder.getAmount()), Optional.of(1));
         savedOrder.setItem(item);
 
         Order updatedOrder = orderService.update(savedOrder);
 
         assertEquals(updatedOrder.getItem(), item);
+
+        orderService.delete(updatedOrder.getId());
+        Optional<Order> deletedOrder = orderService.findById(savedOrder.getId());
+
+        assertEquals(deletedOrder, Optional.empty());
     }
 }

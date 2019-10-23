@@ -9,20 +9,15 @@ import com.mainacad.service.interfaces.CartService;
 import com.mainacad.service.interfaces.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 
-/**
- * This test is working incorrect because of relation to another bean,
- * to create Cart we need other beans but Spring told us,
- * NullPointerException...
- */
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig(ApplicationRunner.class)
-@ActiveProfiles("dev")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CartServiceTest {
 
     @Autowired
@@ -32,7 +27,7 @@ class CartServiceTest {
     UserService userService;
 
     @Test
-    public void testGetAndUpdate() throws NullPointerException {
+    public void testGetAndUpdateAndDelete() throws NullPointerException {
         User user = new User();
         user.setLogin("12344");
         user.setEmail("max05012004@gmail.com");
@@ -57,6 +52,11 @@ class CartServiceTest {
         Cart updatedCart = cartService.update(savedCart);
 
         assertEquals(updatedCart.getStatus(), Status.OPEN);
+
+        cartService.delete(updatedCart.getId());
+        Optional<Cart> deletedCart = cartService.findById(savedCart.getId());
+
+        assertEquals(deletedCart, Optional.empty());
     }
 
 }

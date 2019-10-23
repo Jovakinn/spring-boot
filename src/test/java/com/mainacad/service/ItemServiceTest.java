@@ -5,21 +5,24 @@ import com.mainacad.entity.Item;
 import com.mainacad.service.interfaces.ItemService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringJUnitConfig(ApplicationRunner.class)
-@ActiveProfiles("dev")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ItemServiceTest {
 
     @Autowired
     ItemService itemService;
 
     @Test
-    public void testGetAndUpdate() {
+    public void testGetAndUpdateAndDelete() {
         Item item = new Item();
         item.setPrice(10000);
         item.setName("Machina");
@@ -36,5 +39,10 @@ class ItemServiceTest {
         Item updatedItem = itemService.update(savedItem);
 
         assertEquals(updatedItem.getArticle(), "new_article");
+
+        itemService.delete(updatedItem.getId());
+        Optional<Item> deletedItem = itemService.findById(savedItem.getId());
+
+        assertEquals(deletedItem, Optional.empty());
     }
 }

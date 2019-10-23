@@ -4,6 +4,7 @@ import com.mainacad.entity.Cart;
 import com.mainacad.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CartService {
 
@@ -14,5 +15,6 @@ public interface CartService {
     List<Cart> findByUser(User user);
     List<Cart> findByOpenCartAndUser(Integer userId);
     void delete(Integer id);
+    Optional<Cart> findById(Integer id);
 
 }

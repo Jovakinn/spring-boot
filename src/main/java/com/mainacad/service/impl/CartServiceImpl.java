@@ -65,4 +65,9 @@ public class CartServiceImpl implements CartService {
             cartDAO.delete(cart);
         }
     }
+
+    @Override
+    public Optional<Cart> findById(Integer id) {
+        return cartDAO.findById(id);
+    }
 }
