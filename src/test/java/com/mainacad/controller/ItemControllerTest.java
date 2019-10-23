@@ -71,7 +71,9 @@ class ItemControllerTest {
 
     @Test
     void getOneOrList() throws URISyntaxException {
-        Mockito.when(itemService.findOne(1)).thenReturn(itemService.findOne(1));
+        Item item = new Item();
+
+        Mockito.when(itemService.findOne(1)).thenReturn(item);
 
         RequestEntity<Item> request = new RequestEntity<>(HttpMethod.GET, new URI("/item/1"));
 

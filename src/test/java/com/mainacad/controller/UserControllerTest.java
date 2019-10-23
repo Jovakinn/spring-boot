@@ -21,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -82,7 +81,9 @@ public class UserControllerTest {
 
     @Test
     public void getOne() throws URISyntaxException{
-        Mockito.when(userService.findOne(1)).thenReturn(userService.findOne(1));
+        User user = new User();
+
+        Mockito.when(userService.findOne(1)).thenReturn(user);
 
         RequestEntity<User> request = new RequestEntity<>(HttpMethod.GET, new URI("/user/1"));
 
@@ -114,7 +115,7 @@ public class UserControllerTest {
 
         RequestEntity request = new RequestEntity<>(HttpMethod.GET, new URI("/user"));
 
-        ResponseEntity response = testRestTemplate.exchange(request, ParameterizedTypeReference.forType(List.class));
+        ResponseEntity response = testRestTemplate.exchange(request, ParameterizedTypeReference.forType(User.class));
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
 

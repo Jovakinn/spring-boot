@@ -24,8 +24,6 @@ import java.net.URISyntaxException;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CartControllerTest {
 
-    // MAIN PROBLEM IS CREATING BEANS..
-
     @Autowired
     TestRestTemplate testRestTemplate;
 
@@ -50,6 +48,7 @@ class CartControllerTest {
         cart.setStatus(Status.DELIVERED);
         cart.setTime(1l);
         cart.setUser(user);
+        cartService.save(cart);
 
         Mockito.when(cartService.save(Mockito.any(Cart.class))).thenReturn(cart);
 
@@ -77,6 +76,7 @@ class CartControllerTest {
         cart.setStatus(Status.DELIVERED);
         cart.setTime(1l);
         cart.setUser(user);
+        cartService.save(cart);
 
         Mockito.when(cartService.update(Mockito.any(Cart.class))).thenReturn(cart);
 
@@ -91,7 +91,9 @@ class CartControllerTest {
 
     @Test
     void getOneOrList() throws URISyntaxException, NullPointerException {
-        Mockito.when(cartService.findOne(1)).thenReturn(cartService.findOne(1));
+        Cart cart = new Cart();
+
+        Mockito.when(cartService.findOne(1)).thenReturn(cart);
 
         RequestEntity<Cart> request = new RequestEntity<>(HttpMethod.GET, new URI("/cart/1"));
 

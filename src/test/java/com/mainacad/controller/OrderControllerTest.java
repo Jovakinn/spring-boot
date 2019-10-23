@@ -26,8 +26,6 @@ import java.net.URISyntaxException;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderControllerTest {
 
-    // MAIN PROBLEM IS CREATING BEANS..
-
     @Autowired
     TestRestTemplate testRestTemplate;
 
@@ -135,7 +133,9 @@ class OrderControllerTest {
 
     @Test
     void getOneOrList() throws URISyntaxException, NullPointerException {
-        Mockito.when(orderService.findOne(1)).thenReturn(orderService.findOne(1));
+        Order order = new Order();
+
+        Mockito.when(orderService.findOne(1)).thenReturn(order);
 
         RequestEntity<Order> request = new RequestEntity<>(HttpMethod.GET, new URI("/order/1"));
 
