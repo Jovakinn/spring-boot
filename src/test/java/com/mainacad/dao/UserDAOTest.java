@@ -5,6 +5,7 @@ import com.mainacad.entity.Profile;
 import com.mainacad.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringJUnitConfig(ApplicationRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserDAOTest {
 
     @Autowired
@@ -21,7 +23,7 @@ public class UserDAOTest {
     @Test
     void testFindUserByLoginAndPassword(){
         User user = new User();
-        user.setEmail("ignatenko@gmail.com");
+        user.setEmail("ignatenko2207@gmail.com");
         user.setFirstName("Alex");
         user.setLastName("Ignatenko");
         user.setLogin("ignatenko2207");
@@ -39,7 +41,7 @@ public class UserDAOTest {
         userDAO.delete(savedUser);
     }
 
-//    @Test
+    @Test
     void testFindUserBySQLQuery(){
         User user = new User();
         user.setEmail("ignatenko@gmail.com");
