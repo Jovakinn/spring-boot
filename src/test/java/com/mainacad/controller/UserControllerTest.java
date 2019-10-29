@@ -50,7 +50,7 @@ public class UserControllerTest {
 
         ResponseEntity<User> response = testRestTemplate.exchange(request, User.class);
 
-        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(HttpStatus.OK,response.getStatusCode());
 
         Mockito.verify(userService, Mockito.times(1)).save(Mockito.any(User.class));
     }

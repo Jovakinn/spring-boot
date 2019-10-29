@@ -16,11 +16,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * This test is working incorrect because of relation to another bean,
- * to create Order we need other beans but Spring told us,
- * NullPointerException...
- */
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
