@@ -10,6 +10,6 @@ public class MainController {
 
     @GetMapping("/")
     public String getLandingPage() {
-        return "/webapp/authorization.jsp";
+        return "authorization";
     }
 }
