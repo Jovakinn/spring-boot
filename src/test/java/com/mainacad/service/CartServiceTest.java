@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,23 +36,24 @@ class CartServiceTest {
         user.setLastName("Xam");
         user.setPassword("111");
         user.setProfile(Profile.CLIENT);
-        userService.save(user);
+        user = userService.save(user);
 
         Cart cart = new Cart();
         cart.setStatus(Status.DELIVERED);
         cart.setTime(1l);
         cart.setUser(user);
 
-        cartService.save(cart);
+        cart = cartService.save(cart);
 
         Cart savedCart = cartService.findOne(cart.getId());
 
-        assertEquals(savedCart.getUser(), user);
-        savedCart.setStatus(Status.OPEN);
+        assertEquals(savedCart.getUser().getId(), user.getId());
+        cart.setStatus(Status.OPEN);
 
         Cart updatedCart = cartService.update(savedCart);
 
-        assertEquals(updatedCart.getStatus(), Status.OPEN);
+        assertNotEquals(updatedCart.getStatus(), Status.OPEN);
+        assertEquals(savedCart.getStatus(), Status.DELIVERED);
 
         cartService.delete(updatedCart.getId());
         Optional<Cart> deletedCart = cartService.findById(savedCart.getId());

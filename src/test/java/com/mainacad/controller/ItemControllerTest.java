@@ -14,6 +14,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.net.URI;
@@ -21,6 +22,7 @@ import java.net.URISyntaxException;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles({"json", "test"})
 class ItemControllerTest {
 
     @Autowired
@@ -59,7 +61,7 @@ class ItemControllerTest {
 
         Mockito.when(itemService.update(Mockito.any(Item.class))).thenReturn(item);
 
-        RequestEntity<Item> request = new RequestEntity<>(item, HttpMethod.POST, new URI("/item/update"));
+        RequestEntity<Item> request = new RequestEntity<>(item, HttpMethod.PUT, new URI("/item"));
 
         ResponseEntity<Item> response = testRestTemplate.exchange(request, Item.class);
 

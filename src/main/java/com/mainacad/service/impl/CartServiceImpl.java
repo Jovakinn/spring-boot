@@ -41,8 +41,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<Cart> findByUser(User user) {
-        List<Cart> carts = cartDAO.findByUser(user);
+    public List<Cart> findByUser(Integer userID) {
+        List<Cart> carts = cartDAO.findByUser(userID);
         if (!carts.isEmpty()){
             carts.get(0);
         }

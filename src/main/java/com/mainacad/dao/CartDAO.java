@@ -12,7 +12,7 @@ public interface CartDAO extends JpaRepository<Cart, Integer> {
 
     Optional<Cart> findById(Integer id);
 
-    List<Cart> findByUser(User user);
+    List<Cart> findByUser(Integer userID);
 
     @Query(nativeQuery = true, value = "SELECT * FROM carts WHERE status=2 AND user_id=?")
     List<Cart> findByOpenCartAndUser(Integer usedId);

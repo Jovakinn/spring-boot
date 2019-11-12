@@ -11,7 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringJUnitConfig(ApplicationRunner.class)
@@ -31,7 +30,7 @@ public class UserServiceTest {
         user.setPassword("12345");
         user.setProfile(Profile.ADMIN);
 
-        userService.save(user);
+        user = userService.save(user);
 
         User savedUser = userService.findOne(user.getId());
 

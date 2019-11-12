@@ -17,6 +17,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.net.URI;
@@ -24,6 +25,7 @@ import java.net.URISyntaxException;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles({"json", "test"})
 class OrderControllerTest {
 
     @Autowired
@@ -77,7 +79,7 @@ class OrderControllerTest {
 
         Mockito.when(orderService.save(Mockito.any(Order.class))).thenReturn(order);
 
-        RequestEntity<Order> request = new RequestEntity(order, HttpMethod.POST, new URI("/order"));
+        RequestEntity<Order> request = new RequestEntity<>(order, HttpMethod.POST, new URI("/order"));
 
         ResponseEntity<Order> response = testRestTemplate.exchange(request, Order.class);
 
@@ -122,7 +124,7 @@ class OrderControllerTest {
 
         Mockito.when(orderService.update(Mockito.any(Order.class))).thenReturn(order);
 
-        RequestEntity<Order> request = new RequestEntity(order, HttpMethod.POST, new URI("/order/update"));
+        RequestEntity<Order> request = new RequestEntity<>(order, HttpMethod.PUT, new URI("/order"));
 
         ResponseEntity<Order> response = testRestTemplate.exchange(request, Order.class);
 

@@ -15,6 +15,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.net.URI;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles({"json", "test"})
 class CartControllerTest {
 
     @Autowired
@@ -42,13 +44,11 @@ class CartControllerTest {
         user.setLastName("Xam");
         user.setPassword("111");
         user.setProfile(Profile.CLIENT);
-        userService.save(user);
 
         Cart cart = new Cart();
         cart.setStatus(Status.DELIVERED);
         cart.setTime(1l);
         cart.setUser(user);
-        cartService.save(cart);
 
         Mockito.when(cartService.save(Mockito.any(Cart.class))).thenReturn(cart);
 
@@ -80,7 +80,7 @@ class CartControllerTest {
 
         Mockito.when(cartService.update(Mockito.any(Cart.class))).thenReturn(cart);
 
-        RequestEntity<Cart> request = new RequestEntity<>(cart, HttpMethod.POST, new URI("/cart/update"));
+        RequestEntity<Cart> request = new RequestEntity<>(cart, HttpMethod.PUT, new URI("/cart"));
 
         ResponseEntity<Cart> response = testRestTemplate.exchange(request, Cart.class);
 

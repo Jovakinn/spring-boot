@@ -16,14 +16,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringJUnitConfig(ApplicationRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles({"json", "test"})
 public class UserControllerTest {
 
     @Autowired
@@ -69,7 +72,7 @@ public class UserControllerTest {
 
         Mockito.when(userService.update(Mockito.any(User.class))).thenReturn(user);
 
-        RequestEntity<User> request = new RequestEntity<>(user, HttpMethod.POST, new URI("/user/update"));
+        RequestEntity<User> request = new RequestEntity<>(user, HttpMethod.PUT, new URI("/user"));
 
         ResponseEntity<User> response = testRestTemplate.exchange(request, User.class);
 
@@ -115,7 +118,7 @@ public class UserControllerTest {
 
         RequestEntity request = new RequestEntity<>(HttpMethod.GET, new URI("/user"));
 
-        ResponseEntity response = testRestTemplate.exchange(request, ParameterizedTypeReference.forType(User.class));
+        ResponseEntity response = testRestTemplate.exchange(request, ParameterizedTypeReference.forType(List.class));
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
 

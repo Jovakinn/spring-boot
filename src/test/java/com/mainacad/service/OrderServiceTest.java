@@ -45,14 +45,14 @@ class OrderServiceTest  {
         user.setPassword("12345");
         user.setProfile(Profile.ADMIN);
 
-        userService.save(user);
+        user = userService.save(user);
 
         // creating cart
         Cart cart = new Cart();
         cart.setStatus(Status.OPEN);
         cart.setUser(user);
         cart.setTime(1l);
-        cartService.save(cart);
+        cart = cartService.save(cart);
 
         // creating item
         Item item = new Item();
@@ -60,7 +60,7 @@ class OrderServiceTest  {
         item.setInitPrice(11111);
         item.setName("Perforator");
         item.setPrice(122222);
-        itemService.save(item);
+        item = itemService.save(item);
 
         // creating order
         Order order = new Order();
@@ -68,16 +68,19 @@ class OrderServiceTest  {
         order.setCart(cart);
         order.setItem(item);
 
-        orderService.save(order);
+        order = orderService.save(order);
 
         Order savedOrder = orderService.findOne(order.getId());
 
         assertEquals(java.util.Optional.ofNullable(savedOrder.getAmount()), Optional.of(1));
-        savedOrder.setItem(item);
+        order.setAmount(555);
 
-        Order updatedOrder = orderService.update(savedOrder);
+        Order updatedOrder = orderService.update(order);
 
-        assertEquals(updatedOrder.getItem(), item);
+        assertEquals(updatedOrder.getId(), savedOrder.getId());
+        assertNotEquals(updatedOrder.getAmount(), savedOrder.getAmount());
+
+        assertEquals((int)updatedOrder.getAmount(), 555);
 
         orderService.delete(updatedOrder.getId());
         Optional<Order> deletedOrder = orderService.findById(savedOrder.getId());

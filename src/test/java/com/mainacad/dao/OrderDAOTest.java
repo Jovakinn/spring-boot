@@ -17,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderDAOTest {
 
     @Autowired
+    UserDAO userDAO;
+
+    @Autowired
     OrderDAO orderDAO;
 
     @Autowired
@@ -27,29 +30,73 @@ class OrderDAOTest {
 
 
     @Test
-    void testFindUserByLoginAndPassword() throws NullPointerException{
-
+    void testFindByCart() {
         User user = new User();
-        user.setId(1);
         user.setEmail("ignatenko2207@gmail.com");
         user.setFirstName("Alex");
         user.setLastName("Ignatenko");
         user.setLogin("ignatenko2207");
         user.setPassword("12345");
         user.setProfile(Profile.ADMIN);
+        user = userDAO.save(user);
 
         Cart cart = new Cart();
         cart.setStatus(Status.OPEN);
         cart.setUser(user);
         cart.setTime(1l);
-        cartDAO.save(cart);
+        cart = cartDAO.save(cart);
 
         Item item = new Item();
         item.setArticle("Per111000");
         item.setInitPrice(11111);
         item.setName("Perforator");
         item.setPrice(122222);
-        itemDAO.save(item);
+        item = itemDAO.save(item);
+
+        Order order = new Order();
+        order.setAmount(1);
+        order.setCart(cart);
+        order.setItem(item);
+
+        Order savedOrder = orderDAO.save(order);
+        assertNotNull(savedOrder);
+
+
+        List<Order> orders = orderDAO.findByCart(savedOrder.getCart().getId());
+        assertNotNull(orders);
+        assertFalse(orders.isEmpty());
+        assertEquals(orders.get(0).getCart().getId(), savedOrder.getCart().getId());
+
+        orderDAO.delete(savedOrder);
+
+    }
+
+
+
+    @Test
+    void testFindUserByLoginAndPassword() throws NullPointerException{
+
+        User user = new User();
+        user.setEmail("ignatenko2207@gmail.com");
+        user.setFirstName("Alex");
+        user.setLastName("Ignatenko");
+        user.setLogin("ignatenko2207");
+        user.setPassword("12345");
+        user.setProfile(Profile.ADMIN);
+        user = userDAO.save(user);
+
+        Cart cart = new Cart();
+        cart.setStatus(Status.OPEN);
+        cart.setUser(user);
+        cart.setTime(1l);
+        cart = cartDAO.save(cart);
+
+        Item item = new Item();
+        item.setArticle("Per111000");
+        item.setInitPrice(11111);
+        item.setName("Perforator");
+        item.setPrice(122222);
+        item = itemDAO.save(item);
 
         Order order = new Order();
         order.setAmount(1);
