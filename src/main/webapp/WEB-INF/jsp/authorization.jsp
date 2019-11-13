@@ -22,7 +22,7 @@
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Input password" required>
     <button class="btn btn-lg btn-dark btn-block" type="submit">Log in</button>
     <p>
-        <a href="<c:url value = '/jsp/registration.jsp'/>">Register</a>
+        <a href="<c:url value = '/WEB-INF/jsp/registration.jsp'/>">Register</a>
     </p>
 </form>
 

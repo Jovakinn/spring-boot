@@ -71,7 +71,7 @@
                 <input type="submit">
                 <br>
                 <p>
-                    <a href="<c:url value = '/authorization.jsp'/>">Back to the login form</a>
+                    <a href="<c:url value = '/WEB-INF/jsp/authorization.jsp'/>">Back to the login form</a>
                 </p>
             </form>
         </div>
